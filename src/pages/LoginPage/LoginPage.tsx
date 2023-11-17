@@ -4,6 +4,8 @@ import { Heading } from "../../components/Typografy/Heading";
 import { StyledLink } from "../../components/Typografy/StyledLink";
 import { Button } from "../../components/UI/Button/Button";
 import { Input } from "../../components/UI/Input/Input";
+import { Img } from "../../components/UI/Img/Img";
+
 
 export const LoginPage = () => {
   return (
@@ -31,16 +33,20 @@ export const LoginPage = () => {
           <p>Войти с помощью</p>
           <div className="icons-wrapper">
             <a className="reg__link google-link" href="#">
-              <img src="./img/icons/google.svg" alt="Google" />
+              {/* <img src="./img/icons/google.svg" alt="Google" /> */}
+              <Img src="./img/icons/google.svg" alt="Google" />
             </a>
             <a className="reg__link google-plus-link" href="#">
-              <img src="./img/icons/google-plus.svg" alt="Google Plus" />
+              {/* <img src="./img/icons/google-plus.svg" alt="Google Plus" /> */}
+              <Img src="./img/icons/google-plus.svg" alt="Google Plus" />
             </a>
             <a className="reg__link yandex-link" href="#">
-              <img src="./img/icons/yandex.svg" alt="Yandex" />
+              {/* <img src="./img/icons/yandex.svg" alt="Yandex" /> */}
+              <Img src="./img/icons/yandex.svg" alt="Yandex" />
             </a>
             <a className="reg__link mail-ru-link" href="#">
-              <img src="./img/icons/mail-ru.svg" alt="Mail.ru" />
+              {/* <img src="./img/icons/mail-ru.svg" alt="Mail.ru" /> */}
+              <Img src="./img/icons/mail-ru.svg" alt="Mail.ru" />
             </a>
           </div>
         </div>
