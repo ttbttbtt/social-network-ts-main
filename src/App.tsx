@@ -6,11 +6,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const routerConfig = createBrowserRouter([
   {
-    path: '/',
+    path: '/login',
     element: <LoginPage />
   },
   {
-    path: '/main',
+    path: '/',
     element: <MainPage />
   },
   {
