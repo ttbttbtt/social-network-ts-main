@@ -3,8 +3,9 @@ import { Heading } from "../../components/Typografy/Heading";
 import { Button } from "../../components/UI/Button/Button";
 import { Input } from "../../components/UI/Input/Input";
 import { Container } from "../../components/UI/Container/Container.style";
-import { RegaInfo } from "../../components/RegaInfo/RegaInfo";
-import { StyledLoginPage } from "../LoginPage/LoginPage.style"; // !!!
+// import { RegaInfo } from "../../components/RegaInfo/RegaInfo";
+import { RegistrationInfo } from "../../components/RegistrationInfo/RegistrationInfo";
+import { StyledLoginPage } from "../LoginPage/LoginPage.style"; // стилизация такая же
 
 export const RegistartionPage = () => {
   return (
@@ -32,7 +33,8 @@ export const RegistartionPage = () => {
           />
           <Button isPrimary={true} buttonText="Зарегистрироваться" />
         </form>
-        <RegaInfo />
+        {/* <RegaInfo /> */}
+        <RegistrationInfo span="Уже есть аккаунт?" linktext="Войти" to="/login" />
       </StyledLoginPage>
     </Container>
   );

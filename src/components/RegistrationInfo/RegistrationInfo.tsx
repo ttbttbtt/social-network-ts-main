@@ -1,15 +1,24 @@
 import { StyledRegistrationInfo } from "./RegistrationInfo.style";
 import { StyledLink } from "../Typografy/StyledLink";
 
-export const RegistrationInfo = () => {
+interface RegistrationInfoProps {
+  span: string
+  linktext: string
+  to: string
+}
+
+export const RegistrationInfo = ({span, linktext, to}: RegistrationInfoProps) => {
   return (
     <StyledRegistrationInfo>
       <span>
-        У вас нет аккаунта?
+        {/* У вас нет аккаунта? */}
+        {span}
         {/* <a href="#">Зарегистрироваться</a> */}
-        <StyledLink to="/rega" LinkText="Зарегистрироваться" />
+        <StyledLink to={to} LinkText={linktext} />
       </span>
+
       <p>Войти с помощью</p>
+
       <div className="icons-wrapper">
         <a className="reg__link google-link" href="#">
           <img src="./img/icons/google.svg" alt="Google" />

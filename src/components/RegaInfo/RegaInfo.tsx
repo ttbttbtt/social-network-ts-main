@@ -1,4 +1,4 @@
-import { StyledRegistrationInfo } from "../RegistrationInfo/RegistrationInfo.style"; // !!!
+import { StyledRegistrationInfo } from "../RegistrationInfo/RegistrationInfo.style"; // стилизация такая же
 import { StyledLink } from "../Typografy/StyledLink";
 
 export const RegaInfo = () => {

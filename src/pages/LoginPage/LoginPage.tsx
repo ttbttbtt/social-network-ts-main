@@ -4,7 +4,6 @@ import { Heading } from "../../components/Typografy/Heading";
 import { StyledLink } from "../../components/Typografy/StyledLink";
 import { Button } from "../../components/UI/Button/Button";
 import { Input } from "../../components/UI/Input/Input";
-// import { Img } from "../../components/UI/Img/Img";
 import { Container } from "../../components/UI/Container/Container.style";
 import { RegistrationInfo } from "../../components/RegistrationInfo/RegistrationInfo";
 import { StyledLoginPage } from "./LoginPage.style";
@@ -38,7 +37,8 @@ export const LoginPage = () => {
         {/* <a href="#">Забыли пароль?</a> */}
         <StyledLink to="/" LinkText="Забыли пароль?" />
 
-        <RegistrationInfo />
+        {/* <RegistrationInfo /> */}
+        <RegistrationInfo span="У вас нет аккаунта?" linktext="Зарегистрироваться" to="/rega" />
         {/* </div> */}
       </StyledLoginPage>
     </Container>
