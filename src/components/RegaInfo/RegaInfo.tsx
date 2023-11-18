@@ -1,15 +1,15 @@
-import { StyledRegistrationInfo } from "./RegistrationInfo.style";
+import { StyledRegistrationInfo } from "../RegistrationInfo/RegistrationInfo.style"; // !!!
 import { StyledLink } from "../Typografy/StyledLink";
 
-export const RegistrationInfo = () => {
+export const RegaInfo = () => {
   return (
     <StyledRegistrationInfo>
       <span>
-        У вас нет аккаунта?
-        {/* <a href="#">Зарегистрироваться</a> */}
-        <StyledLink to="/rega" LinkText="Зарегистрироваться" />
+        Уже есть аккаунт?
+        {/* <a href="#">Войти</a> */}
+        <StyledLink to="/login" LinkText="Войти" />
       </span>
-      <p>Войти с помощью</p>
+      <p>Регистрация с помощью</p>
       <div className="icons-wrapper">
         <a className="reg__link google-link" href="#">
           <img src="./img/icons/google.svg" alt="Google" />
