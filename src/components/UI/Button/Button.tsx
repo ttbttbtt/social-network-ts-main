@@ -8,6 +8,7 @@ interface ButtonProps {
 export const Button = ({buttonText, isPrimary}: ButtonProps) => {
     return (
         <StyledButton $isPrimary={isPrimary}>
+            {/* $isPrimary - $ - скрываем от браузера */}
             {buttonText}
         </StyledButton>
     )

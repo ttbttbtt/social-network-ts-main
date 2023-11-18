@@ -1,5 +1,5 @@
 import React from "react";
-import "./LoginPage.scss";
+import "./LoginPage.scss"; // не используется - можно закомментить и удалить файл
 import { Heading } from "../../components/Typografy/Heading";
 import { StyledLink } from "../../components/Typografy/StyledLink";
 import { Button } from "../../components/UI/Button/Button";
@@ -26,7 +26,7 @@ export const LoginPage = () => {
             placeholder="Номер телефона"
           />
           <Input
-            isError={true}
+            isError={false}
             errorMessage="Неверный пароль"
             type="password"
             placeholder="Пароль"

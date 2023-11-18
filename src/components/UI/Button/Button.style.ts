@@ -10,6 +10,11 @@ export const StyledButton = styled.button<StyledButtonProps>`
   padding: 12px 15px;
   font-size: inherit;
   border-radius: 10px;
+
+  border: 1px solid transparent;
+  outline: 0;
+  font-family: inherit;
+
   /* background-color: ${(props) => props.theme.colors.primeColor}; */
   color: white;
   transition: 200ms;
@@ -63,19 +68,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
     translate: 0 0;
     box-shadow: none;
   }
-
-  /* input {
-    padding: 12px 15px;
-    background-color: var(--bgc);
-    border-radius: 10px;
-    border: 1px solid transparent;
-
-    transition: 200ms;
-
-    &:is(:hover, :focus) {
-      border-color: var(--prime-color);
-    }
-  } */
 
   @media (max-width: 730px) {
     padding: 10px 12px;

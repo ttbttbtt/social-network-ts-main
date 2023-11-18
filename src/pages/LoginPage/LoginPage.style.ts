@@ -17,7 +17,7 @@ export const StyledLoginPage = styled.div`
   input {
     display: block;
     width: 100%;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     border: 2px solid ${(props) => props.theme.colors.disabledBgc};
     background-color: transparent;
 
