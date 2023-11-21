@@ -18,7 +18,7 @@ export const StyledLoginPage = styled.div`
     display: block;
     width: 100%;
     /* margin-bottom: 20px; */
-    border: 2px solid ${(props) => props.theme.colors.disabledBgc};
+    /* border: 2px solid ${(props) => props.theme.colors.disabledBgc}; */
     background-color: transparent;
 
     &:last-child {
