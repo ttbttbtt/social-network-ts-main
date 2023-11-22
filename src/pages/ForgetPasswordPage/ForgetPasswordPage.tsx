@@ -9,6 +9,8 @@ import { Controller, useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
+import { Spanning } from "../../components/Typografy/Spanning";
+
 interface IRegistrationForm {
   username?: string;
   userphone: string;
@@ -53,7 +55,10 @@ export const ForgetPasswordPage = () => {
     <Container>
       <StyledLoginPage>
         <Heading headingText="Забыли пароль?" />
-        <span>Укажите свой номер телефона, чтобы получить код для сброса пароля.</span>
+
+        {/* <span>Укажите свой номер телефона, чтобы получить код для сброса пароля.</span> */}
+        <Spanning spanningText="Укажите свой номер телефона, чтобы получить код для сброса пароля." />
+
         <form onSubmit={handleSubmit(onRegistrationSubmit)}>
           <Controller
             name="userphone"

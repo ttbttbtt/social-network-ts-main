@@ -47,6 +47,11 @@ export const StyledLoginPage = styled.div`
      }
    }
 
+   span {
+    /* color: #A0A0A0; */
+    color: ${(props) => props.theme.colors.gray};
+   }
+
  @media (max-width: 530px) {
      width: 100%;
  }
