@@ -13,7 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { changeUser } from "../../store/authSlice";
+import { setUser } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
 
 interface IRegistrationForm {
@@ -69,7 +69,7 @@ export const RegistartionPage = () => {
   console.log('state-rega: ', user)
 
   const onRegistrationSubmit: SubmitHandler<IRegistrationForm> = (data) => {
-    dispatch(changeUser(mockUser))
+    dispatch(setUser(mockUser))
     console.log("DATA: ", data);
   };
 

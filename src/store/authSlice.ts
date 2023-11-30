@@ -22,11 +22,11 @@ const authSlice = createSlice({
   //   initialState: initialState, // можно сократить эту строку следующей
   initialState,
   reducers: {
-    changeUser(state, action) {
+    setUser(state, action) {
       state.user = action.payload;
     },
   },
 });
 
 export default authSlice.reducer;
-export const { changeUser } = authSlice.actions;
+export const { setUser } = authSlice.actions;
