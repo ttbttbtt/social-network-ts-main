@@ -18,7 +18,7 @@ const initialState: IAuthSliceState = {
 };
 
 const authSlice = createSlice({
-  name: "userSlice",
+  name: "authSlice",
   //   initialState: initialState, // можно сократить эту строку следующей
   initialState,
   reducers: {
