@@ -1,8 +1,14 @@
 import React from "react";
 import "./ProfilePage.scss";
 import { Header } from "../../components/UI/Header/Header";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { useTypedSelector } from "../../hooks/useTypedSelector";
 
 export const ProfilePage = () => {
+  const user = useTypedSelector((state) => state.userSlice.user)
+
+
   return (
     <div className="container">
       <Header />
@@ -253,7 +259,7 @@ export const ProfilePage = () => {
           <div className="user__block">
             <img src="./img/users/denis-frolov.jpeg" alt="Denis Frolov" />
             <div className="user__description">
-              <h1 className="user__name">Денис Фролов</h1>
+              <h1 className="user__name">{user?.name}</h1>
               <div className="user__info">
                 <div className="parameter">
                   <span className="key">Друзья</span>

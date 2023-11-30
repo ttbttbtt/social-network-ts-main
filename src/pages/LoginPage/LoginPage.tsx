@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./LoginPage.scss"; // не используется - можно закомментить и удалить файл
 import { Heading } from "../../components/Typografy/Heading";
 import { StyledLink } from "../../components/Typografy/StyledLink";
@@ -11,6 +11,11 @@ import { StyledLoginPage } from "./LoginPage.style";
 import { Controller, useForm, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+
+import { RootState } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { changeUser } from "../../store/userSlice";
+import { useNavigate } from "react-router-dom";
 
 interface IRegistrationForm {
   username?: string;
@@ -32,6 +37,15 @@ const registrationFormSchema = yup.object({
     .required("Обязательное поле!"),
 });
 
+const mockUser = {
+  mail: 'vasya@mail.com',
+  phone_number: '1234567',
+  user_id: 1,
+  name: 'Vasya Petrov',
+  reg_date: new Date().toISOString(),
+  city: 'Andijan',
+}
+
 export const LoginPage = () => {
   const {
     control,
@@ -48,9 +62,26 @@ export const LoginPage = () => {
 
   console.warn("ERRORS: ", errors);
 
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+
+  const user = useSelector((state: RootState) => state.userSlice.user)
+  console.log('state-login: ', user)
+
   const onRegistrationSubmit: SubmitHandler<IRegistrationForm> = (data) => {
+    dispatch(changeUser(mockUser))
     console.log("DATA: ", data);
   };
+
+  useEffect(() => {
+    console.log('USER: ', user)
+
+    if (user?.user_id) {
+      navigate("/profile")
+    }
+
+  }, [user])
 
   return (
     <Container>
