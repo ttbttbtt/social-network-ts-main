@@ -13,74 +13,83 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../../store/authSlice";
+import { setUser } from "../../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useRegisterUserMutation } from "../../store/API/authApi";
 
 interface IRegistrationForm {
   username: string;
   userphone: string;
   userpassword: string;
+  useremail: string;
+  usercity: string;
 }
 
-const regexUZB = /^(?:\+998)?(?:\d{2})?(?:\d{7})$/;
+// const regexUZB = /^(?:\+998)?(?:\d{2})?(?:\d{7})$/;
 
 const registrationFormSchema = yup.object({
   username: yup.string().required("Обязательное поле!"),
   userphone: yup
     .string()
-    .matches(regexUZB, "Введите узбекский номер телефона")
+    // .matches(regexUZB, "Введите узбекский номер телефона")
     .required("Обязательное поле!"),
   userpassword: yup
     .string()
     .min(4, "Пароль должен содержать как минимум 4 символа")
     .required("Обязательное поле!"),
+  useremail: yup.string().email().required("Обязательное поле!"),
+  usercity: yup.string().required("Обязательное поле!"),
 });
 
-const mockUser = {
-  mail: 'petya@mail.com',
-  phone_number: '7654321',
-  user_id: 2,
-  name: 'Petya Petin',
-  reg_date: new Date().toISOString(),
-  city: 'Samarkand',
-}
+// const mockUser = {
+//   mail: "petya@mail.com",
+//   phone_number: "7654321",
+//   user_id: 2,
+//   name: "Petya Petin",
+//   reg_date: new Date().toISOString(),
+//   city: "Samarkand",
+// };
 
 export const RegistartionPage = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<IRegistrationForm>({
+  // } = useForm<IRegistrationForm>({
+  } = useForm({
     resolver: yupResolver(registrationFormSchema),
     defaultValues: {
       username: "",
       userphone: "",
       userpassword: "",
+      useremail: "",
+      usercity: "",
     },
   });
 
   console.warn("ERRORS: ", errors);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const user = useSelector((state: RootState) => state.authSlice.user);
+  const user = useSelector((state: RootState) => state.userSlice.user);
+  console.log("state-rega: ", user);
 
-  const navigate = useNavigate()
-
-  const user = useSelector((state: RootState) => state.authSlice.user)
-  console.log('state-rega: ', user)
+  const [registerUser, { data: userData }] = useRegisterUserMutation();
 
   const onRegistrationSubmit: SubmitHandler<IRegistrationForm> = (data) => {
-    dispatch(setUser(mockUser))
-    console.log("DATA: ", data);
+    registerUser({ name: data.username, email: data.useremail, phone_number: data.userphone, password: data.userpassword, user_city: data.usercity });
+    // dispatch(setUser(mockUser));
+    // console.log("DATA: ", data);
   };
-
+  
   useEffect(() => {
-    console.log('USER: ', user)
+    console.log("USER: ", userData);
 
-    if (user?.user_id) {
-      navigate("/")
+    if (userData?.user_id) {
+      navigate("/");
     }
-
-  }, [user])
+  }, [userData, navigate]);
 
   return (
     <Container>
@@ -96,6 +105,20 @@ export const RegistartionPage = () => {
                 errorMessage={errors.username?.message}
                 type="text"
                 placeholder="Имя и фамилия"
+                {...field}
+              />
+            )}
+          />
+
+          <Controller
+            name="useremail"
+            control={control}
+            render={({ field }) => (
+              <Input
+                isError={errors.useremail ? true : false}
+                errorMessage={errors.useremail?.message}
+                type="email"
+                placeholder="Почта"
                 {...field}
               />
             )}
@@ -124,6 +147,20 @@ export const RegistartionPage = () => {
                 errorMessage={errors.userpassword?.message}
                 type="password"
                 placeholder="Пароль"
+                {...field}
+              />
+            )}
+          />
+
+          <Controller
+            name="usercity"
+            control={control}
+            render={({ field }) => (
+              <Input
+                isError={errors.usercity ? true : false}
+                errorMessage={errors.usercity?.message}
+                type="text"
+                placeholder="Город"
                 {...field}
               />
             )}
