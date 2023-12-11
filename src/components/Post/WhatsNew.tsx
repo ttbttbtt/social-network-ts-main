@@ -3,7 +3,7 @@ import { StyledWhatsNew } from "./WhatsNew.style";
 export const WhatsNew = () => {
   return (
     <StyledWhatsNew>
-    //   <div className="WhatsNew">
+       {/* <div className="WhatsNew"> */}
         <img src="./img/users/arina-volkova.jpeg" alt="User" />
         <input
           type="text"
@@ -43,7 +43,7 @@ export const WhatsNew = () => {
             />
           </svg>
         </div>
-    //   </div>
+       {/* </div> */}
     </StyledWhatsNew>
   );
 };

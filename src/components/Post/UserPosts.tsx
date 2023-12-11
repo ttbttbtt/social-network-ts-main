@@ -3,7 +3,7 @@ import { StyledUserPosts } from "./UserPosts.style";
 export const UserPosts = () => {
   return (
     <StyledUserPosts>
-    //   <div className="UserPosts">
+       {/* <div className="UserPosts"> */}
         <div className="UserPosts__controls">
           <div className="tabs">
             <div className="tab _no-select photos _active">
@@ -95,7 +95,7 @@ export const UserPosts = () => {
             />
           </svg>
         </div>
-    //   </div>
+       {/* </div> */}
     </StyledUserPosts>
   );
 };

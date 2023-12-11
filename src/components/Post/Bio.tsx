@@ -3,7 +3,7 @@ import { StyledBio } from "./Bio.style";
 export const Bio = () => {
   return (
     <StyledBio>
-    //   <div className="bio">
+       {/* <div className="bio"> */}
         <div className="bio__data">
           <div className="data__item">
             <svg
@@ -71,7 +71,7 @@ export const Bio = () => {
           <button className="primary">Подробнее</button>
           <button className="secondary">Редактировать </button>
         </div>
-    //   </div>
+       {/* </div> */}
     </StyledBio>
   );
 };

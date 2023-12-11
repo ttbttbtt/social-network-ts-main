@@ -3,7 +3,7 @@ import { StyledHist } from "./Hist.style";
 export const Hist = () => {
   return (
     <StyledHist>
-    //   <div className="History">
+       {/* <div className="History"> */}
         <svg
           className="icon icon-slider-button"
           xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@ export const Hist = () => {
             </div>
           </div>
         </div>
-    //   </div>
+       {/* </div> */}
     </StyledHist>
   );
 };
