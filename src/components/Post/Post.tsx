@@ -1,4 +1,6 @@
+import React, {useState} from "react";
 import { StyledPost } from "./Post.style";
+import { PostSettings } from "./PostSettings";
 
 interface IPostProps {
   isLiked?: boolean;
@@ -15,6 +17,9 @@ export const Post = ({
   userName,
   regDate,
 }: IPostProps) => {
+
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false)
+
   return (
     <StyledPost $isLiked={isLiked} $isMarked={isMarked}>
       {/* <div className="Post _liked _marked"> */}
@@ -141,6 +146,7 @@ export const Post = ({
         className="icon icon-more"
         viewBox="0 0 25 5"
         xmlns="http://www.w3.org/2000/svg"
+        onClick={() => setIsSettingsOpen(!isSettingsOpen)}
       >
         <g id="more">
           <circle id="ellipse" cx="22.5" cy="2.5" r="2.5" />
@@ -149,6 +155,7 @@ export const Post = ({
         </g>
       </svg>
       {/* </div> */}
+      {isSettingsOpen && <PostSettings onDeleteClick={() => {}} onEditClick={() => {}} />}
     </StyledPost>
   );
 };

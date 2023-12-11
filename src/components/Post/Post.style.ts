@@ -45,7 +45,7 @@ export const StyledPost = styled.div<IStyledPostProps>`
       }
     `}
 
-    /*   
+  /*   
   &._marked {
     .icon-wrapper {
       .icon-mark {
@@ -59,13 +59,13 @@ export const StyledPost = styled.div<IStyledPostProps>`
     ${(props) =>
     props.$isMarked &&
     css`
-    .icon-wrapper {
-      .icon-mark {
-        fill: ${(props) => props.theme.colors.primeColor};
-        stroke: 0;
-        stroke-width: 0;
+      .icon-wrapper {
+        .icon-mark {
+          fill: ${(props) => props.theme.colors.primeColor};
+          stroke: 0;
+          stroke-width: 0;
+        }
       }
-    }
     `}
 
 
@@ -94,4 +94,13 @@ export const StyledPost = styled.div<IStyledPostProps>`
   &__text {
     margin-bottom: 20px;
   }
+`;
+
+export const PostSettingsBox = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 8px;
+  background: #fefefe;
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 `;

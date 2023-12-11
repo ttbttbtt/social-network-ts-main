@@ -6,33 +6,39 @@ import { MainPage } from "./pages/MainPage/MainPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+import { PostPage } from "./pages/PostPage/PostPage";
+
 const routerConfig = createBrowserRouter([
   {
-    path: '/rega',
-    element: <RegistartionPage />
+    path: "/rega",
+    element: <RegistartionPage />,
   },
   {
-    path: '/login',
-    element: <LoginPage />
+    path: "/login",
+    element: <LoginPage />,
   },
   {
-    path: '/forget',
-    element: <ForgetPasswordPage />
+    path: "/forget",
+    element: <ForgetPasswordPage />,
   },
   {
-    path: '/',
-    element: <MainPage />
+    path: "/",
+    element: <MainPage />,
   },
   {
-    path: '/profile',
-    element: <ProfilePage />
-  }
-])
+    path: "/profile",
+    element: <ProfilePage />,
+  },
+  {
+    path: "/post/:postId",
+    element: <PostPage />,
+  },
+]);
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      < RouterProvider router={routerConfig} />
+      <RouterProvider router={routerConfig} />
     </div>
   );
 };
