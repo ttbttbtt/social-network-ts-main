@@ -15,6 +15,7 @@ import { Friend } from "../../components/Post/Friend";
 import { Bio } from "../../components/Post/Bio";
 import { UserElemPro } from "../../components/Post/UserElemPro";
 import { UserPosts } from "../../components/Post/UserPosts";
+import { WhatsNew } from "../../components/Post/WhatsNew";
 
 export const ProfilePage = () => {
   const user = useTypedSelector((state) => state.userSlice.user);
@@ -313,7 +314,8 @@ export const ProfilePage = () => {
           <div className="profile-background"></div>
         </div>
         <main className="Main">
-          <div className="WhatsNew">
+
+          {/* <div className="WhatsNew">
             <img src="./img/users/arina-volkova.jpeg" alt="User" />
             <input
               type="text"
@@ -353,7 +355,8 @@ export const ProfilePage = () => {
                 />
               </svg>
             </div>
-          </div>
+          </div> */}
+          <WhatsNew />
 
           {/* <div className="UserPosts">
             <div className="UserPosts__controls">
