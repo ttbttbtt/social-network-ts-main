@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./ProfilePage.scss";
 import { Header } from "../../components/UI/Header/Header";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useTypedSelector } from "../../hooks/useTypedSelector";
 
-export const ProfilePage = () => {
-  const user = useTypedSelector((state) => state.userSlice.user)
+import { Post } from "../../components/Post/Post";
+import {
+  useGetPostListQuery,
+  useLazyGetPostListQuery,
+} from "../../store/API/postApi";
+import { MusicElem } from "../../components/Post/MusicElem";
+import { Friend } from "../../components/Post/Friend";
+import { Bio } from "../../components/Post/Bio";
+import { UserElemPro } from "../../components/Post/UserElemPro";
+import { UserPosts } from "../../components/Post/UserPosts";
 
+export const ProfilePage = () => {
+  const user = useTypedSelector((state) => state.userSlice.user);
+
+  const [fetchTrigger, { data, isLoading, isError }] =
+    useLazyGetPostListQuery();
+
+  useEffect(() => {
+    fetchTrigger(null);
+
+    console.log("data", data);
+  }, [fetchTrigger, data]);
 
   return (
     <div className="container">
@@ -177,7 +196,8 @@ export const ProfilePage = () => {
               <h2>Подписки</h2>
               <span className="count">123</span>
             </div>
-            <div className="UserElem">
+
+            {/* <div className="UserElem">
               <img src="./img/profile/profile-img-1.jpeg" alt="User" />
               <div className="user__description">
                 <p className="main__text">N E W</p>
@@ -240,7 +260,17 @@ export const ProfilePage = () => {
                 <p className="secondary__text">Мода</p>
               </div>
               <span className="Badge">3</span>
-            </div>
+            </div> */}
+
+            <UserElemPro maintext="N E W" secondarytext="Развитие" />
+            <UserElemPro maintext="Aesthetics" secondarytext="Стиль" />
+            <UserElemPro maintext="дом твоей эстетики" secondarytext="Творчество" />
+            <UserElemPro maintext="wailet" secondarytext="Искусство" />
+            <UserElemPro maintext=">A W E S O M E" secondarytext="Стиль" />
+            <UserElemPro maintext="minimalism" secondarytext="Фотография" />
+            <UserElemPro maintext="Словарный запасE" secondarytext="Литература" />
+            <UserElemPro maintext="Look" secondarytext="Мода" />
+
           </div>
         </aside>
         <div className="ProfileHeader">
@@ -324,7 +354,8 @@ export const ProfilePage = () => {
               </svg>
             </div>
           </div>
-          <div className="UserPosts">
+
+          {/* <div className="UserPosts">
             <div className="UserPosts__controls">
               <div className="tabs">
                 <div className="tab _no-select photos _active">
@@ -416,8 +447,10 @@ export const ProfilePage = () => {
                 />
               </svg>
             </div>
-          </div>
-          <div className="Post _liked _marked">
+          </div> */}
+          <UserPosts />
+
+          {/* <div className="Post _liked _marked">
             <div className="UserElem">
               <img src="./img/users/aleksandr-maykov.jpeg" alt="User" />
               <div className="user__description">
@@ -548,8 +581,17 @@ export const ProfilePage = () => {
                 <circle id="ellipse_3" cx="2.5" cy="2.5" r="2.5" />
               </g>
             </svg>
-          </div>
-          <div className="Post Repost _liked _marked">
+          </div> */}
+          {data?.message.length &&
+            data.message.map((post) => (
+              <Post
+                postText={post.main_text}
+                regDate={post.reg_date}
+                userName={post.user_fk.name}
+              />
+            ))}
+
+          {/* <div className="Post Repost _liked _marked">
             <div className="UserElem Repost__owner">
               <img src="./img/users/mark-krahmalev.jpeg" alt="User" />
               <div className="user__description">
@@ -670,10 +712,10 @@ export const ProfilePage = () => {
                 <circle id="ellipse_3" cx="2.5" cy="2.5" r="2.5" />
               </g>
             </svg>
-          </div>
+          </div> */}
         </main>
         <aside className="RightSide">
-          <div className="bio">
+          {/* <div className="bio">
             <div className="bio__data">
               <div className="data__item">
                 <svg
@@ -741,14 +783,16 @@ export const ProfilePage = () => {
               <button className="primary">Подробнее</button>
               <button className="secondary">Редактировать </button>
             </div>
-          </div>
+          </div> */}
+          <Bio />
+
           <div className="FriendsBlock">
             <div className="Friends__title">
               <h2>Друзья</h2>
               <span className="count">130</span>
             </div>
             <div className="Friends__wrapper">
-              <div className="friend">
+              {/* <div className="friend">
                 <img src="./img/users/aleksandr-maykov.jpeg" alt="Friend" />
                 <span className="friend__name">Александр</span>
               </div>
@@ -783,7 +827,16 @@ export const ProfilePage = () => {
               <div className="friend">
                 <img src="./img/users/gleb.jpeg" alt="Friend" />
                 <span className="friend__name">Глеб</span>
-              </div>
+              </div> */}
+              <Friend name="Александр" />
+              <Friend name="Софья" />
+              <Friend name="Андрей" />
+              <Friend name="Дарья" />
+              <Friend name="Денис" />
+              <Friend name="Марк" />
+              <Friend name="Катарина" />
+              <Friend name="Виктория" />
+              <Friend name="Глеб" />
             </div>
           </div>
           <div className="MusicBlock">
@@ -791,7 +844,8 @@ export const ProfilePage = () => {
               <h2>Вы недавно слушали</h2>
               <span>123</span>
             </div>
-            <div className="MusicElem">
+
+            {/* <div className="MusicElem">
               <img src="./img/music/album-1.png" alt="Album" />
               <div className="music__description">
                 <p className="main__text">Pieces</p>
@@ -838,7 +892,13 @@ export const ProfilePage = () => {
                 <p className="secondary__text">Glass Animals</p>
               </div>
               <div className="plus-button"></div>
-            </div>
+            </div> */}
+            <MusicElem maintext="Pieces" secondarytext="Andrew Belle" />
+            <MusicElem maintext="In the Wind" secondarytext="On-The-Go" />
+            <MusicElem maintext="On you own" secondarytext="Meltt" />
+            <MusicElem maintext="Infinity" secondarytext="James Young" />
+            <MusicElem maintext="Let me follow" secondarytext="Son Lux" />
+            <MusicElem maintext="Youth" secondarytext="Glass Animals" />
           </div>
         </aside>
       </div>

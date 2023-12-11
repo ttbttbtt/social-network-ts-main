@@ -80,7 +80,7 @@ export const RegistartionPage = () => {
   const onRegistrationSubmit: SubmitHandler<IRegistrationForm> = (data) => {
     registerUser({ name: data.username, email: data.useremail, phone_number: data.userphone, password: data.userpassword, user_city: data.usercity });
     // dispatch(setUser(mockUser));
-    // console.log("DATA: ", data);
+    console.log("DATA: ", data);
   };
   
   useEffect(() => {

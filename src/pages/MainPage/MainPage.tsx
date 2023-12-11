@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MainPage.scss";
 import { Header } from "../../components/UI/Header/Header";
 import { Container } from "../../components/UI/Container/Container.style";
+import { Post } from "../../components/Post/Post";
+import {
+  useGetPostListQuery,
+  useLazyGetPostListQuery,
+} from "../../store/API/postApi";
+
+import { UserElem } from "../../components/Post/UserElem";
+import { MusicElem } from "../../components/Post/MusicElem";
+import { Hist } from "../../components/Post/Hist";
+import { WhatsNew } from "../../components/Post/WhatsNew";
 
 export const MainPage = () => {
+  // const { data, isLoading, isError } = useGetPostListQuery(null);
+  const [fetchTrigger, { data, isLoading, isError }] =
+    useLazyGetPostListQuery();
+
+  useEffect(() => {
+    fetchTrigger(null);
+
+    console.log("data", data);
+  }, [fetchTrigger, data]);
+
   return (
     <Container>
       <Header />
@@ -239,7 +259,7 @@ export const MainPage = () => {
           </div>
         </aside>
         <main className="Main">
-          <div className="WhatsNew">
+          {/* <div className="WhatsNew">
             <img src="./img/users/arina-volkova.jpeg" alt="User" />
             <input
               type="text"
@@ -279,8 +299,10 @@ export const MainPage = () => {
                 />
               </svg>
             </div>
-          </div>
-          <div className="History">
+          </div> */}
+          <WhatsNew />
+
+          {/* <div className="History">
             <svg
               className="icon icon-slider-button"
               xmlns="http://www.w3.org/2000/svg"
@@ -385,8 +407,19 @@ export const MainPage = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="Post _liked _marked">
+          </div> */}
+          <Hist />
+
+          {data?.message.length &&
+            data.message.map((post) => (
+              <Post
+                postText={post.main_text}
+                regDate={post.reg_date}
+                userName={post.user_fk.name}
+              />
+            ))}
+
+          {/* <div className="Post _liked _marked">
             <div className="UserElem">
               <img src="./img/users/aleksandr-maykov.jpeg" alt="User" />
               <div className="user__description">
@@ -517,8 +550,8 @@ export const MainPage = () => {
                 <circle id="ellipse_3" cx="2.5" cy="2.5" r="2.5" />
               </g>
             </svg>
-          </div>
-          <div className="Post Repost _liked _marked">
+          </div> */}
+          {/* <div className="Post Repost _liked _marked">
             <div className="UserElem Repost__owner">
               <img src="./img/users/mark-krahmalev.jpeg" alt="User" />
               <div className="user__description">
@@ -639,7 +672,7 @@ export const MainPage = () => {
                 <circle id="ellipse_3" cx="2.5" cy="2.5" r="2.5" />
               </g>
             </svg>
-          </div>
+          </div> */}
         </main>
         <aside className="RightSide">
           <div className="List">
@@ -647,7 +680,8 @@ export const MainPage = () => {
               <h2>Близкие друзья</h2>
               <span className="count">123</span>
             </div>
-            <div className="UserElem">
+
+            {/* <div className="UserElem">
               <img src="./img/users/aleksandr-maykov.jpeg" alt="User" />
               <div className="user__description">
                 <p className="main__text">Александр Майков</p>
@@ -658,26 +692,31 @@ export const MainPage = () => {
             <div className="UserElem">
               <img src="./img/users/aleksandr-maykov.jpeg" alt="User" />
               <div className="user__description">
-                <p className="main__text">Александр Майков</p>
-                <p className="secondary__text _online">Онлайн</p>
+              <p className="main__text">Александр Майков</p>
+              <p className="secondary__text _online">Онлайн</p>
               </div>
               <span className="Badge">3</span>
             </div>
             <div className="UserElem">
               <img src="./img/users/aleksandr-maykov.jpeg" alt="User" />
               <div className="user__description">
-                <p className="main__text">Александр Майков</p>
-                <p className="secondary__text _online">Онлайн</p>
+              <p className="main__text">Александр Майков</p>
+              <p className="secondary__text _online">Онлайн</p>
               </div>
               <span className="Badge">3</span>
-            </div>
+            </div> */}
+            <UserElem maintext="Александр Майков" />
+            <UserElem maintext="Александр Майков" />
+            <UserElem maintext="Александр Майков" />
+
+
           </div>
           <div className="MusicBlock">
             <div className="MusicBlock__title">
               <h2>Вы недавно слушали</h2>
               <span>123</span>
             </div>
-            <div className="MusicElem">
+            {/* <div className="MusicElem">
               <img src="./img/music/album-1.png" alt="Album" />
               <div className="music__description">
                 <p className="main__text">Pieces</p>
@@ -724,7 +763,15 @@ export const MainPage = () => {
                 <p className="secondary__text">Glass Animals</p>
               </div>
               <div className="plus-button"></div>
-            </div>
+            </div> */}
+            <MusicElem maintext="Pieces" secondarytext="Andrew Belle" />
+            <MusicElem maintext="In the Wind" secondarytext="On-The-Go" />
+            <MusicElem maintext="On you own" secondarytext="Meltt" />
+            <MusicElem maintext="Infinity" secondarytext="James Young" />
+            <MusicElem maintext="Let me follow" secondarytext="Son Lux" />
+            <MusicElem maintext="Youth" secondarytext="Glass Animals" />
+
+
           </div>
         </aside>
       </div>
