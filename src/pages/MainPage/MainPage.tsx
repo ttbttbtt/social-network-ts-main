@@ -12,6 +12,8 @@ import { UserElem } from "../../components/Post/UserElem";
 import { MusicElem } from "../../components/Post/MusicElem";
 import { Hist } from "../../components/Post/Hist";
 import { WhatsNew } from "../../components/Post/WhatsNew";
+import { Navbar } from "../../components/Post/Navbar";
+import { List } from "../../components/Post/List";
 
 export const MainPage = () => {
   // const { data, isLoading, isError } = useGetPostListQuery(null);
@@ -29,7 +31,8 @@ export const MainPage = () => {
       <Header />
       <div className="MainPage">
         <aside className="LeftSide">
-          <nav className="Navbar">
+
+          {/* <nav className="Navbar">
             <ul className="navbar__list">
               <li className="navbar__item">
                 <svg
@@ -186,8 +189,10 @@ export const MainPage = () => {
                 <span className="Badge">100</span>
               </li>
             </ul>
-          </nav>
-          <div className="List">
+          </nav> */}
+          <Navbar />
+
+          {/* <div className="List">
             <div className="List__title">
               <h2>Подписки</h2>
               <span className="count">123</span>
@@ -256,7 +261,9 @@ export const MainPage = () => {
               </div>
               <span className="Badge">3</span>
             </div>
-          </div>
+          </div> */}
+          <List />
+
         </aside>
         <main className="Main">
           {/* <div className="WhatsNew">

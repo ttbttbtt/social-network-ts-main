@@ -16,6 +16,7 @@ import { Bio } from "../../components/Post/Bio";
 import { UserElemPro } from "../../components/Post/UserElemPro";
 import { UserPosts } from "../../components/Post/UserPosts";
 import { WhatsNew } from "../../components/Post/WhatsNew";
+import { Navbar } from "../../components/Post/Navbar";
 
 export const ProfilePage = () => {
   const user = useTypedSelector((state) => state.userSlice.user);
@@ -34,7 +35,8 @@ export const ProfilePage = () => {
       <Header />
       <div className="ProfilePage">
         <aside className="LeftSide">
-          <nav className="Navbar">
+
+          {/* <nav className="Navbar">
             <ul className="navbar__list">
               <li className="navbar__item">
                 <svg
@@ -191,7 +193,9 @@ export const ProfilePage = () => {
                 <span className="Badge">100</span>
               </li>
             </ul>
-          </nav>
+          </nav> */}
+          <Navbar />
+
           <div className="List">
             <div className="List__title">
               <h2>Подписки</h2>
@@ -274,6 +278,7 @@ export const ProfilePage = () => {
 
           </div>
         </aside>
+
         <div className="ProfileHeader">
           <svg
             className="icon icon-edit"
@@ -313,6 +318,7 @@ export const ProfilePage = () => {
           </div>
           <div className="profile-background"></div>
         </div>
+
         <main className="Main">
 
           {/* <div className="WhatsNew">
