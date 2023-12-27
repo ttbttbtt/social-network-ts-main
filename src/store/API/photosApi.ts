@@ -19,7 +19,7 @@ export interface IGetPhotoResponse {
 // запрос и ответ - добавление фото
 export interface IAddNewPhotoPayload {
   post_id: number;
-  photo_file: object; // ??
+  photo_file: object; // string?
 }
 export interface IAddNewPhotoResponse {
   status: number;
@@ -29,7 +29,7 @@ export interface IAddNewPhotoResponse {
 // запрос и ответ - редактирование фото
 export interface IEditPhotoPayload {
   photo_id : number;
-  photo_file: object; // ?? замена старого на новое
+  photo_file: object; // string? замена старого на новое
 }
 export interface IEditPhotoResponse {
   status: number;
