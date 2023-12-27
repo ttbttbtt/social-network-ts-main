@@ -2,7 +2,7 @@ import React from "react";
 import { PostSettingsBox } from "./Post.style";
 
 type PostSettingsProps = {
-  onEditClick: () => void;
+  onEditClick?: () => void;
   onDeleteClick: () => void;
 };
 
@@ -12,8 +12,8 @@ export const PostSettings = ({
 }: PostSettingsProps) => {
   return (
     <PostSettingsBox>
-      <span>Изменить</span>
-      <span>Удалить</span>
+      <span onClick={onEditClick}>Изменить</span>
+      <span onClick={onDeleteClick}>Удалить</span>
     </PostSettingsBox>
   );
 };

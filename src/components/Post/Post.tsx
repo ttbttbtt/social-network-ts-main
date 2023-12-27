@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { StyledPost } from "./Post.style";
 import { PostSettings } from "./PostSettings";
+
+import { useDeletePostMutation } from "../../store/API/postApi";
 
 interface IPostProps {
   isLiked?: boolean;
@@ -8,6 +10,10 @@ interface IPostProps {
   postText: string;
   userName: string;
   regDate: string;
+  photos: Array<string>;
+  postId: number | string;
+  onPostDelete?: () => void;
+  onPostEditClick?: () => void;
 }
 
 export const Post = ({
@@ -16,9 +22,32 @@ export const Post = ({
   postText,
   userName,
   regDate,
+  photos,
+  postId,
+  onPostDelete,
+  onPostEditClick,
 }: IPostProps) => {
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+  const [deletePost, {isSuccess}] = useDeletePostMutation();
 
-  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false)
+  useEffect(() => {
+    if (typeof onPostDelete === 'function' && isSuccess) {
+      onPostDelete()
+      setIsSettingsOpen(false)
+    }
+
+  }, [isSuccess])
+
+  const handlePostDelete = () => {
+    deletePost(postId)
+  }
+
+  const handleEditClick = () => {
+    if (typeof onPostEditClick === 'function') {
+      onPostEditClick()
+      setIsSettingsOpen(false)
+    }
+  }
 
   return (
     <StyledPost $isLiked={isLiked} $isMarked={isMarked}>
@@ -33,38 +62,42 @@ export const Post = ({
         </div>
       </div>
       <p className="Post__text">{postText}</p>
-      <div className="media-container">
-        <img
-          className="media__item"
-          src="./img/post/nature-1.png"
-          alt="Post Item"
-        />
-        <img
-          className="media__item"
-          src="./img/post/nature-2.png"
-          alt="Post Item"
-        />
-        <img
-          className="media__item"
-          src="./img/post/nature-3.png"
-          alt="Post Item"
-        />
-        <img
-          className="media__item"
-          src="./img/post/nature-4.png"
-          alt="Post Item"
-        />
-        <img
-          className="media__item"
-          src="./img/post/nature-5.png"
-          alt="Post Item"
-        />
-        <img
-          className="media__item"
-          src="./img/post/nature-6.png"
-          alt="Post Item"
-        />
-      </div>
+
+      {!!photos.length && (
+        <div className="media-container">
+          <img
+            className="media__item"
+            src="./img/post/nature-1.png"
+            alt="Post Item"
+          />
+          <img
+            className="media__item"
+            src="./img/post/nature-2.png"
+            alt="Post Item"
+          />
+          <img
+            className="media__item"
+            src="./img/post/nature-3.png"
+            alt="Post Item"
+          />
+          <img
+            className="media__item"
+            src="./img/post/nature-4.png"
+            alt="Post Item"
+          />
+          <img
+            className="media__item"
+            src="./img/post/nature-5.png"
+            alt="Post Item"
+          />
+          <img
+            className="media__item"
+            src="./img/post/nature-6.png"
+            alt="Post Item"
+          />
+        </div>
+      )}
+
       <div className="PostControls">
         <div className="icon-wrapper like">
           <span className="count likes-count">-500</span>
@@ -155,7 +188,12 @@ export const Post = ({
         </g>
       </svg>
       {/* </div> */}
-      {isSettingsOpen && <PostSettings onDeleteClick={() => {}} onEditClick={() => {}} />}
+      {isSettingsOpen && (
+        <PostSettings
+          onDeleteClick={handlePostDelete}
+          onEditClick={handleEditClick}
+        />
+      )}
     </StyledPost>
   );
 };

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseURL } from "../../utils/baseURL";
 
-interface PostItem {
+export interface PostItem {
   main_text: string;
   user_id: number;
   id: number;
@@ -18,13 +18,29 @@ interface PostItem {
   photos: string[];
   comments: string[];
 }
-interface IGetPostListResponse {
+export interface IGetPostListResponse {
   status: number;
   message: PostItem[];
 }
-interface IGetPostItemByIdResponse {
+export interface IGetPostItemByIdResponse {
   status: number;
   message: PostItem;
+}
+export interface IAddNewPostPayload {
+  user_id: number;
+  main_text: string;
+}
+export interface IAddNewPostResponse {
+  status: number;
+  post_id: number;
+}
+export interface IEditPostPayload {
+  post_id: number;
+  new_text: string;
+}
+export interface IEditPostResponse {
+  status: number;
+  message: string;
 }
 
 export const postApi = createApi({
@@ -38,6 +54,32 @@ export const postApi = createApi({
     getPostById: builder.query<IGetPostItemByIdResponse, string>({
       query: (postId: string) => `/post?post_id=${postId}`,
     }),
+
+    // добавление поста
+    addNewpost: builder.mutation<IAddNewPostResponse, IAddNewPostPayload>({
+      query: (payload) => ({
+        url: "/post",
+        method: "POST",
+        body: payload,
+      }),
+    }),
+
+    // редактирование поста
+    editPost: builder.mutation<IEditPostResponse, IEditPostPayload>({
+      query: (payload) => ({
+        url: "/post",
+        method: "PUT",
+        body: payload,
+      }),
+    }),
+
+    // удаление поста
+    deletePost: builder.mutation<any, any>({
+      query: (post_id: string) => ({
+        url: `/post/?post_id=${post_id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -45,4 +87,7 @@ export const {
   useGetPostListQuery,
   useLazyGetPostListQuery,
   useLazyGetPostByIdQuery,
+  useAddNewpostMutation,
+  useDeletePostMutation,
+  useEditPostMutation,
 } = postApi;

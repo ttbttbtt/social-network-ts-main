@@ -98,9 +98,24 @@ export const StyledPost = styled.div<IStyledPostProps>`
 
 export const PostSettingsBox = styled.div`
   position: absolute;
-  top: 0;
-  right: 0;
+  top: -8px;
+  right: -8px;
   border-radius: 8px;
   background: #fefefe;
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Более мягкая тень */
+  display: flex;
+  flex-flow: column;
+  padding: 16px; /* Увеличил отступы для более просторного вида */
+
+  span {
+    cursor: pointer;
+    margin-bottom: 8px; /* Добавил отступ снизу между элементами */
+    &:last-child {
+      margin-bottom: 0; /* Убрал отступ после последнего элемента */
+    }
+
+    &:hover {
+      color: #526ed3; /* Цвет при наведении */
+    }
+  }
 `;

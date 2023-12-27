@@ -362,7 +362,7 @@ export const ProfilePage = () => {
               </svg>
             </div>
           </div> */}
-          <WhatsNew />
+          <WhatsNew onNewPostAdded={() => fetchTrigger(null)} />
 
           {/* <div className="UserPosts">
             <div className="UserPosts__controls">
@@ -591,12 +591,16 @@ export const ProfilePage = () => {
               </g>
             </svg>
           </div> */}
-          {data?.message.length &&
-            data.message.map((post) => (
+          {!!data?.message.length &&
+            [...data.message].reverse().map((post) => (
               <Post
+                key={post.id}
                 postText={post.main_text}
                 regDate={post.reg_date}
                 userName={post.user_fk.name}
+                photos={post.photos}
+                postId={post.id}
+                onPostDelete={() => fetchTrigger(null)}
               />
             ))}
 

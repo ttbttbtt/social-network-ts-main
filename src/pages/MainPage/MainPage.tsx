@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "./MainPage.scss";
 import { Header } from "../../components/UI/Header/Header";
 import { Container } from "../../components/UI/Container/Container.style";
@@ -15,10 +15,17 @@ import { WhatsNew } from "../../components/Post/WhatsNew";
 import { Navbar } from "../../components/Post/Navbar";
 import { List } from "../../components/Post/List";
 
+import { FullscreenLoader } from "../../components/UI/FullscreenLoader/FullscreenLoader";
+import { EditPostForm } from "../PostPage/EdiitPostForm";
+import type { PostItem } from "../../store/API/postApi";
+
 export const MainPage = () => {
   // const { data, isLoading, isError } = useGetPostListQuery(null);
   const [fetchTrigger, { data, isLoading, isError }] =
     useLazyGetPostListQuery();
+
+  const [selectedPost, setSelectedPost] = useState<PostItem | null>();
+  const [openEditPost, setOpenEditPost] = useState<boolean>(false);
 
   useEffect(() => {
     fetchTrigger(null);
@@ -26,12 +33,27 @@ export const MainPage = () => {
     console.log("data", data);
   }, [fetchTrigger, data]);
 
+  const onEditModalClose = useCallback(() => {
+    setSelectedPost(null);
+    setOpenEditPost(false);
+  }, []);
+
+  const handleEditPostClick = useCallback((post: PostItem) => {
+    setSelectedPost(post)
+    setOpenEditPost(true)
+  }, [])
+
+  const handleEditPostSuccess = useCallback(() => {
+    fetchTrigger(null);
+    onEditModalClose()
+  }, [])
+
   return (
     <Container>
       <Header />
+      {isLoading && <FullscreenLoader />}
       <div className="MainPage">
         <aside className="LeftSide">
-
           {/* <nav className="Navbar">
             <ul className="navbar__list">
               <li className="navbar__item">
@@ -263,7 +285,6 @@ export const MainPage = () => {
             </div>
           </div> */}
           <List />
-
         </aside>
         <main className="Main">
           {/* <div className="WhatsNew">
@@ -307,7 +328,7 @@ export const MainPage = () => {
               </svg>
             </div>
           </div> */}
-          <WhatsNew />
+          <WhatsNew onNewPostAdded={() => fetchTrigger(null)} />
 
           {/* <div className="History">
             <svg
@@ -417,14 +438,23 @@ export const MainPage = () => {
           </div> */}
           <Hist />
 
-          {data?.message.length &&
-            data.message.map((post) => (
-              <Post
-                postText={post.main_text}
-                regDate={post.reg_date}
-                userName={post.user_fk.name}
-              />
-            ))}
+          {isError && <h1>Произошла ошибка</h1>}
+          {/* {isLoading && <h1>Идёт загрузка...</h1>} */}
+          {!!data?.message.length &&
+            [...data.message]
+              .reverse()
+              .map((post) => (
+                <Post
+                  key={post.id}
+                  postText={post.main_text}
+                  regDate={post.reg_date}
+                  userName={post.user_fk.name}
+                  photos={post.photos}
+                  postId={post.id}
+                  onPostDelete={() => fetchTrigger(null)}
+                  onPostEditClick={() => handleEditPostClick(post)}
+                />
+              ))}
 
           {/* <div className="Post _liked _marked">
             <div className="UserElem">
@@ -681,6 +711,16 @@ export const MainPage = () => {
             </svg>
           </div> */}
         </main>
+
+        {selectedPost && (
+          <EditPostForm
+            isOpen={openEditPost}
+            post={selectedPost}
+            onCloseModal={onEditModalClose}
+            onEditPostSuccess={handleEditPostSuccess}
+          />
+        )}
+
         <aside className="RightSide">
           <div className="List">
             <div className="List__title">
@@ -715,8 +755,6 @@ export const MainPage = () => {
             <UserElem maintext="Александр Майков" />
             <UserElem maintext="Александр Майков" />
             <UserElem maintext="Александр Майков" />
-
-
           </div>
           <div className="MusicBlock">
             <div className="MusicBlock__title">
@@ -777,8 +815,6 @@ export const MainPage = () => {
             <MusicElem maintext="Infinity" secondarytext="James Young" />
             <MusicElem maintext="Let me follow" secondarytext="Son Lux" />
             <MusicElem maintext="Youth" secondarytext="Glass Animals" />
-
-
           </div>
         </aside>
       </div>
